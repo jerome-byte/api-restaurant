@@ -6,7 +6,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'https://carnivore-back-office.netlify.app',
+      'https://back-office-x19p.onrender.com/',
       'http://localhost:5173',
       'http://localhost:3000',
     ],
