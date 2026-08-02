@@ -6,7 +6,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'https://back-office-blush-mu.vercel.app/',
+      'https://back-office-6i3q.onrender.com',
       'http://localhost:5173',
       'http://localhost:3000',
     ],
