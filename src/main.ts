@@ -6,7 +6,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'https://back-office-blush-mu.vercel.app/',
+      'https://back-office-blush-mu.vercel.app',
       'http://localhost:5173',
       'http://localhost:3000',
     ],
@@ -14,7 +14,8 @@ async function bootstrap() {
     credentials: true,
   });
 
-  await app.listen(3000);
-  console.log('🚀 Serveur démarré sur le port 3000');
+  const port = process.env.PORT || 3000;
+await app.listen(port);
+console.log(`🚀 Serveur démarré sur le port ${port}`);
 }
 bootstrap();
