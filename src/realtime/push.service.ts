@@ -86,6 +86,22 @@ export class PushService implements OnModuleInit, OnModuleDestroy {
     };
     for (const [k, v] of Object.entries(n.data ?? {})) data[k] = String(v);
     const notification = { title: n.titre, body: n.message };
+    // Habillage « Carnivore » : petite icône couverts + vert de la marque (Android),
+    // logo de l'app pour le web.
+    const android = {
+      priority: 'high' as const,
+      notification: {
+        icon: 'ic_notification',
+        color: '#059669',
+        sound: 'default',
+      },
+    };
+    const webpush = {
+      notification: {
+        icon: '/icons/Icon-192.png',
+        badge: '/icons/Icon-192.png',
+      },
+    };
     try {
       if (n.cible === 'user' && n.user_id) {
         const { data: p } = await this.supa.admin
@@ -98,10 +114,17 @@ export class PushService implements OnModuleInit, OnModuleDestroy {
           token: p.fcm_token,
           notification,
           data,
-          android: { priority: 'high' },
+          android,
+          webpush,
         });
       } else {
-        await this.messaging.send({ topic: n.cible, notification, data });
+        await this.messaging.send({
+          topic: n.cible,
+          notification,
+          data,
+          android,
+          webpush,
+        });
       }
     } catch (e) {
       this.logger.warn(
